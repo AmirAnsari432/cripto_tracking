@@ -8,7 +8,6 @@ import { SingleCoin } from "../config/api";
 import { numberWithCommas } from "../Component/CoinTable";
 import { CryptoState } from "../CryptoContext";
 
-
 const CoinPage = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState();
@@ -76,6 +75,17 @@ const CoinPage = () => {
       },
     },
   }));
+
+  // const styles = {
+  //
+  //     fontFamily: "Montserrat",
+  //   },
+  //   pagination: {
+  //     "& .MuiPaginationItem-root": {
+  //       color: "gold",
+  //     },
+  //   },
+  // };
 
   const classes = useStyles();
 

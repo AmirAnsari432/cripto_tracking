@@ -16,7 +16,7 @@ import {
   TableContainer,
   Table,
   Paper,
-  // makeStyles,
+  makeStyles,
 } from "@material-ui/core";
 import axios from "axios";
 import { CoinList } from "../config/api";
@@ -27,38 +27,29 @@ export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+const useStyles = makeStyles({
+  row: {
+    backgroundColor: "#16171a",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#131111",
+    },
+  },
+  pagination: {
+    "& .MuiPaginationItem-root": {
+      color: "gold",
+    },
+  },
+});
+
 export default function CoinsTable() {
+  const classes = useStyles();
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
   const { currency, symbol } = CryptoState();
-
-  // const useStyles = makeStyles ({
-  //   row : {
-  //     back
-  //   }
-  // })
-
-  // const styles = {
-  //   row: {
-  //     backgroundColor: "#16171a",
-  //     cursor: "pointer",
-  //     "&:hover": {
-  //       backgroundColor: "#131111",
-  //     },
-  //     fontFamily: "Montserrat",
-  //   },
-  //   pagination: {
-  //     "& .MuiPaginationItem-root": {
-  //       color: "gold",
-  //     },
-  //   },
-  // };
-
-  // const classes = useStyles();
-  // const history = useHistory();
 
   const darkTheme = createTheme({
     palette: {
@@ -135,21 +126,14 @@ export default function CoinsTable() {
                   .map((row) => {
                     const profit = row.price_change_percentage_24h > 0;
                     return (
-                      <TableRow
-                        style={{
-                          backgroundColor: "#16171a",
-                          cursor: "pointer",
-                        }}
-                        // onClick={() => history.push(`/coins/${row.id}`)}
-                        // className={classes.row}
-                        key={row.name}
-                      >
+                      <TableRow className={classes.row} key={row.name}>
                         <TableCell
                           component="th"
                           scope="row"
                           style={{
                             display: "flex",
                             gap: 15,
+                            width: "100%",
                           }}
                         >
                           <img
@@ -207,12 +191,13 @@ export default function CoinsTable() {
         <Pagination
           count={(handleSearch()?.length / 10).toFixed(0)}
           style={{
+            backgroundColor: "#16171a",
             padding: 20,
             width: "100%",
             display: "flex",
             justifyContent: "center",
           }}
-          // classes={{ ul: classes.pagination }}
+          classes={{ ul: classes.pagination }}
           onChange={(_, value) => {
             setPage(value);
             window.scroll(0, 450);

@@ -12,31 +12,30 @@ import SelectButton from "./SelectButton";
 import { chartDays } from "../config/data";
 import { CryptoState } from "../CryptoContext";
 
-const CoinInfo = ({ coin }) => {
+const useStyles = makeStyles((theme) => ({
+  container: {
+    width: "75%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 25,
+    padding: 40,
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      marginTop: 0,
+      padding: 20,
+      paddingTop: 0,
+    },
+  },
+}));
+
+function CoinInfo({ coin }) {
+  const classes = useStyles();
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
   const [flag, setflag] = useState(false);
-
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      width: "75%",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 25,
-      padding: 40,
-      [theme.breakpoints.down("md")]: {
-        width: "100%",
-        marginTop: 0,
-        padding: 20,
-        paddingTop: 0,
-      },
-    },
-  }));
-
-  const classes = useStyles();
 
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
@@ -62,7 +61,6 @@ const CoinInfo = ({ coin }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      {/* className={classes.container} */}
       <div className={classes.container}>
         {!historicData | (flag === false) ? (
           <CircularProgress
@@ -125,6 +123,6 @@ const CoinInfo = ({ coin }) => {
       </div>
     </ThemeProvider>
   );
-};
+}
 
 export default CoinInfo;

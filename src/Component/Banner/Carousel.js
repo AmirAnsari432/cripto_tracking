@@ -7,7 +7,24 @@ import { TrendingCoins } from "../../config/api";
 import { CryptoState } from "../../CryptoContext";
 import { numberWithCommas } from "../CoinTable";
 
+const useStyles = makeStyles({
+  carousel: {
+    height: "50%",
+    display: "flex",
+    alignItems: "center",
+  },
+  carouselItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    cursor: "pointer",
+    textTransform: "uppercase",
+    color: "white",
+  },
+});
+
 const Carousel = () => {
+  const classes = useStyles();
   const [trending, setTrending] = useState([]);
   const { currency, symbol } = CryptoState();
 
@@ -23,30 +40,11 @@ const Carousel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
-  // const useStyles = makeStyles((theme) => ({
-  //   carousel: {
-  //     height: "50%",
-  //     display: "flex",
-  //     alignItems: "center",
-  //   },
-  //   carouselItem: {
-  //     display: "flex",
-  //     flexDirection: "column",
-  //     alignItems: "center",
-  //     cursor: "pointer",
-  //     textTransform: "uppercase",
-  //     color: "white",
-  //   },
-  // }));
-
-  // const classes = useStyles();
-
   const items = trending.map((coin) => {
     let profit = coin?.price_change_percentage_24h >= 0;
 
     return (
-      // className={classes.carouselItem}
-      <Link  to={`/coins/${coin.id}`}>
+      <Link className={classes.carouselItem} to={`/coins/${coin.id}`}>
         <img
           src={coin?.image}
           alt={coin.name}
@@ -84,7 +82,7 @@ const Carousel = () => {
 
   return (
     // className={classes.carousel}
-    <div >
+    <div>
       <AliceCarousel
         mouseTracking
         infinite

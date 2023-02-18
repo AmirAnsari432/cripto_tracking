@@ -1,7 +1,7 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import Carousel from "./Carousel";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   banner: {
     backgroundImage: "url(./banner2.jpg)",
   },
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
-}));
+});
 
 function Banner() {
   const classes = useStyles();
