@@ -76,17 +76,6 @@ const CoinPage = () => {
     },
   }));
 
-  // const styles = {
-  //
-  //     fontFamily: "Montserrat",
-  //   },
-  //   pagination: {
-  //     "& .MuiPaginationItem-root": {
-  //       color: "gold",
-  //     },
-  //   },
-  // };
-
   const classes = useStyles();
 
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;

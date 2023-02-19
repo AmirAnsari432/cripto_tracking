@@ -39,6 +39,7 @@ function Banner() {
               fontWeight: "bold",
               marginBottom: 15,
               fontFamily: "Montserrat",
+              color: "white",
             }}
           >
             Crypto Hunter

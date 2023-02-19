@@ -30,6 +30,7 @@ export function numberWithCommas(x) {
 const useStyles = makeStyles({
   row: {
     backgroundColor: "#16171a",
+    // backgroundColor: "red",
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#131111",
@@ -87,7 +88,12 @@ export default function CoinsTable() {
       <Container style={{ textAlign: "center" }}>
         <Typography
           variant="h4"
-          style={{ margin: 18, fontFamily: "Montserrat" }}
+          style={{
+            margin: 18,
+            fontFamily: "Montserrat",
+            height: "100%",
+            color: "white",
+          }}
         >
           Cryptocurrency Prices by Market Cap
         </Typography>
