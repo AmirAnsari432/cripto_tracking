@@ -3,9 +3,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { SingleCoin } from "../config/api";
 import { CryptoState } from "../CryptoContext";
-import { makeStyles, Typography } from "@material-ui/core";
+import { LinearProgress, makeStyles, Typography } from "@material-ui/core";
 import CoinInfo from "../Component/CoinInfo";
 import { fontFamily } from "@mui/system";
+import { numberWithCommas } from "../Component/CoinTable";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,6 +42,22 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     color: "white",
   },
+  marketdata: {
+    alignSelf: "start",
+    padding: 25,
+    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "space-around",
+    },
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    [theme.breakpoints.down("xs")]: {
+      alignItems: "start",
+    },
+  },
 }));
 
 const CoinPage = () => {
@@ -60,6 +77,8 @@ const CoinPage = () => {
   useEffect(() => {
     fetchCoin();
   }, []);
+
+  if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 
   return (
     <div className={classes.container}>
@@ -98,10 +117,57 @@ const CoinPage = () => {
               {coin?.market_cap_rank}
             </Typography>
           </span>
+          <span
+            style={{
+              display: "flex",
+            }}
+          >
+            <Typography variant="h5" className={classes.heading}>
+              Current Price :
+            </Typography>
+            &nbsp; &nbsp;
+            <Typography
+              variant="h5"
+              style={{
+                fontFamily: "Montserrat",
+                color: "white",
+              }}
+            >
+              {symbol}
+              {numberWithCommas(
+                coin?.market_data.current_price[currency.toLowerCase()]
+              )}
+            </Typography>
+          </span>{" "}
+          <span
+            style={{
+              display: "flex",
+            }}
+          >
+            <Typography variant="h5" className={classes.heading}>
+              Market Cap :
+            </Typography>
+            &nbsp; &nbsp;
+            <Typography
+              variant="h5"
+              style={{
+                fontFamily: "Montserrat",
+                color: "white",
+              }}
+            >
+              {symbol}
+              {numberWithCommas(
+                coin?.market_data.market_cap[currency.toLowerCase()]
+                  .toString()
+                  .slice(0, 6)
+              )}
+              M
+            </Typography>
+          </span>
         </div>
       </div>
 
-      <CoinInfo coin={coin} />
+      {/* <CoinInfo coin={coin} /> */}
     </div>
   );
 };
