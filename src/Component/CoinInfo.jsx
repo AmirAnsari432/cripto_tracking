@@ -12,26 +12,26 @@ import SelectButton from "./SelectButton";
 import { chartDays } from "../config/data";
 import { CryptoState } from "../CryptoContext";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    width: "75%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 25,
-    padding: 40,
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      marginTop: 0,
-      padding: 20,
-      paddingTop: 0,
-    },
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   container: {
+//     width: "75%",
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     marginTop: 25,
+//     padding: 40,
+//     [theme.breakpoints.down("md")]: {
+//       width: "100%",
+//       marginTop: 0,
+//       padding: 20,
+//       paddingTop: 0,
+//     },
+//   },
+// }));
 
 function CoinInfo({ coin }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
@@ -60,8 +60,9 @@ function CoinInfo({ coin }) {
   });
 
   return (
+    // className={classes.container}
     <ThemeProvider theme={darkTheme}>
-      <div className={classes.container}>
+      <div >
         {!historicData | (flag === false) ? (
           <CircularProgress
             style={{ color: "gold" }}
